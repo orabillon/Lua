@@ -12,25 +12,36 @@ love.graphics.setDefaultFilter("nearest")
 
 love.window.setTitle("Pong")
 
+function CheckCollision(x1, y1, w1, h1, x2, y2, w2, h2)
+    return x1 < x2 + w2 and x2 < x1 + w1 and y1 < y2 + h2 and y2 < y1 + h1
+end
+
+imgPad1 = love.graphics.newImage("images/Pad1.png")
+imgPad2 = love.graphics.newImage("images/Pad2.png")
+imgBall = love.graphics.newImage("images/Ball.png")
+
 pad = {}
 pad.x = 0
 pad.y = 0
-pad.largeur = 20
-pad.hauteur = 80
+pad.largeur = nill
+pad.hauteur = nill
+pad.img = imgPad1
 
 pad2 = {}
 pad2.x = 0
 pad2.y = 0
-pad2.largeur = 20
-pad2.hauteur = 80
+pad2.largeur = nill
+pad2.hauteur = nill
+pad2.img = imgPad2
 
 balle = {}
 balle.x = 400
 balle.y = 300
-balle.largeur = 20
-balle.hauteur = 20
-balle.vitesse_x = 2
-balle.vitesse_y = 2
+balle.largeur = nill
+balle.hauteur = nill
+balle.vitesse_x = 1
+balle.vitesse_y = 1
+balle.img = imgBall
 
 score_joueur1 = 0
 score_joueur2 = 0
@@ -42,19 +53,23 @@ function CentreBalle()
     balle.y = love.graphics.getHeight() / 2
     balle.y = balle.y - balle.hauteur / 2
 
-    balle.vitesse_x = 2
-    balle.vitesse_y = 2
-
     pad.x = 0
     pad.y = 0
 
-    pad2.x = love.graphics.getWidth() - pad2.largeur
-    pad2.y = love.graphics.getHeight() - pad2.hauteur
+    pad2.x = screenWidth - pad2.largeur
+    pad2.y = screenHeight - pad2.hauteur
 end
 
 function love.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
+
+    pad.largeur = pad.img:getWidth()
+    pad.hauteur = pad.img:getHeight()
+    pad2.largeur = pad2.img:getWidth()
+    pad2.hauteur = pad2.img:getHeight()
+    balle.largeur = balle.img:getWidth()
+    balle.hauteur = balle.img:getHeight()
 
     CentreBalle()
 end
@@ -125,11 +140,11 @@ end
 
 function love.draw()
     -- Dessin des pads
-    love.graphics.rectangle("fill", pad.x, pad.y, pad.largeur, pad.hauteur)
-    love.graphics.rectangle("fill", pad2.x, pad2.y, pad2.largeur, pad2.hauteur)
+    love.graphics.draw(pad.img, pad.x, pad.y)
+    love.graphics.draw(pad2.img, pad2.x, pad2.y)
 
     -- Dessin de la balle
-    love.graphics.rectangle("fill", balle.x, balle.y, balle.largeur, balle.hauteur)
+    love.graphics.draw(balle.img, balle.x, balle.y)
 
     -- BONUS : Affiche le score centré sur l'écran
     local font = love.graphics.getFont()
