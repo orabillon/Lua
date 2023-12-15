@@ -10,11 +10,9 @@ end
 io.stdout:setvbuf("no")
 
 local Game = require("src/game")
-local Dice = require("src/dice")
+
 
 local monRpg = Game:new()
-local d6 = Dice:new(6)
-d6:roll()
 
 function love.load()
     love.window.setTitle("Paper RPG by Gamecodeur")
@@ -29,14 +27,12 @@ end
 
 function love.draw()
     monRpg:draw()
-    d6:draw()
+  
 end
 
 function love.mousepressed(x, y, b)
 end
 
 function love.keypressed(key)
-    if key == "space" then
-        d6:roll()
-    end
+    monRpg:keypressed(key)
 end
