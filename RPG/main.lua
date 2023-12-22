@@ -11,14 +11,15 @@ io.stdout:setvbuf("no")
 
 local Game = require("src/game")
 
-
-local monRpg = Game:new()
+local monRpg = nil
 
 function love.load()
     love.window.setTitle("Paper RPG by Gamecodeur")
 
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
+
+    monRpg = Game:new()
 end
 
 function love.update(dt)
@@ -27,7 +28,6 @@ end
 
 function love.draw()
     monRpg:draw()
-  
 end
 
 function love.mousepressed(x, y, b)
