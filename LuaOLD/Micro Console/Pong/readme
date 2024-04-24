@@ -1,0 +1,20 @@
+vthumb.display.width  : largeur de l'écran
+vthumb.display.height : hauteur de l'écran
+
+Récupérer l'état des boutons :
+vthumb.buttonA.pressed / justPressed
+vthumb.buttonB.pressed / justPressed
+vthumb.buttonU.pressed / justPressed
+vthumb.buttonD.pressed / justPressed
+vthumb.buttonL.pressed / justPressed
+vthumb.buttonR.pressed / justPressed
+
+Modifier un pixel :
+vthumb.setPixel(x,y)
+
+Lire la valeur d'un pixel (0 ou 1) :
+pixel = vthumb.getPixel(x,y)
+
+Dessiner un sprite (8x8, chaque ligne décrite avec un octet)
+spriteMap = {255, 129, 129, 129, 129, 129, 129, 255}
+vthumb.Sprite(x, y, spriteMap)
